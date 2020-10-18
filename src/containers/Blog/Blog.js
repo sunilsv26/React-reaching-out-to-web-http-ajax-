@@ -14,7 +14,7 @@ class Blog extends Component {
   };
   componentDidMount() {
     axios.get("https://jsonplaceholder.typicode.com/posts").then((response) => {
-      const posts = response.data.slice(0, 6);
+      const posts = response.data.slice(0, 4);
       const updatedPosts = posts.map((post) => {
         return { ...post, author: "Max" };
       });
@@ -22,8 +22,8 @@ class Blog extends Component {
     });
   }
 
-  selectedPostHandler=(id,title,body)=>{
-    this.setState({selectedId:id,title:title,content:body})
+  selectedPostHandler=(id)=>{
+    this.setState({selectedId:id})
   }
 
   postDeleteHandler=()=>{
@@ -34,17 +34,19 @@ class Blog extends Component {
       return <Post title={post.title} 
       key={post.id} 
       author={post.author}
-      clicked={()=>this.selectedPostHandler(post.id,post.title,post.body)}/>;
+      clicked={()=>this.selectedPostHandler(post.id)}/>;
     });
     return (
       <div>
-        <section className="Posts">{posts}</section>
+        <section className="Posts">
+          {posts}
+        </section>
+
         <section>
           <FullPost id={this.state.selectedId} 
-          title={this.state.title}
-          content={this.state.content}
-          deleted={this.postDeleteHandler}/>
+          />
         </section>
+
         <section>
           <NewPost />
         </section>
