@@ -25,6 +25,10 @@ class Blog extends Component {
   selectedPostHandler=(id,title,body)=>{
     this.setState({selectedId:id,title:title,content:body})
   }
+
+  postDeleteHandler=()=>{
+    this.setState({selectedId:null})
+  }
   render() {
     const posts = this.state.Posts.map((post) => {
       return <Post title={post.title} 
@@ -38,7 +42,8 @@ class Blog extends Component {
         <section>
           <FullPost id={this.state.selectedId} 
           title={this.state.title}
-          content={this.state.content}/>
+          content={this.state.content}
+          deleted={this.postDeleteHandler}/>
         </section>
         <section>
           <NewPost />
