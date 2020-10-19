@@ -11,6 +11,7 @@ class Blog extends Component {
     selectedId:null,
     title:null,
     content:null,
+    err:false,
   };
   componentDidMount() {
     axios.get("https://jsonplaceholder.typicode.com/posts").then((response) => {
@@ -19,7 +20,7 @@ class Blog extends Component {
         return { ...post, author: "Max" };
       });
       return this.setState({ Posts: updatedPosts});
-    });
+    }).catch(error=>this.setState({err:true}));
   }
 
   selectedPostHandler=(id)=>{
@@ -30,12 +31,15 @@ class Blog extends Component {
     this.setState({selectedId:null})
   }
   render() {
-    const posts = this.state.Posts.map((post) => {
-      return <Post title={post.title} 
-      key={post.id} 
-      author={post.author}
-      clicked={()=>this.selectedPostHandler(post.id)}/>;
-    });
+    let posts = <p style={{textAlign:'center'}}>Somrthing Went Wrong</p>
+    if(!this.state.err){
+      posts = this.state.Posts.map((post) => {
+        return <Post title={post.title} 
+        key={post.id} 
+        author={post.author}
+        clicked={()=>this.selectedPostHandler(post.id)}/>;
+      });
+    }
     return (
       <div>
         <section className="Posts">
