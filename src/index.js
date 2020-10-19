@@ -5,7 +5,9 @@ import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 import axios from "axios";
 
- let myRequest=axios.interceptors.request.use(
+axios.defaults.baseURL='https://jsonplaceholder.typicode.com'
+
+let myRequest=axios.interceptors.request.use(
   (request) => {
     console.log(request);
     //here we are blocking the request always need to return request
