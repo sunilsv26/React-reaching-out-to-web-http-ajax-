@@ -5,7 +5,7 @@ import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 import axios from "axios";
 
-axios.interceptors.request.use(
+ let myRequest=axios.interceptors.request.use(
   (request) => {
     console.log(request);
     //here we are blocking the request always need to return request
@@ -17,7 +17,9 @@ axios.interceptors.request.use(
   }
 );
 
-axios.interceptors.response.use(
+axios.interceptors.request.eject(myRequest)
+
+let myResponse =axios.interceptors.response.use(
   (response) => {
     console.log(response);
     //here we are blocking the request always need to return request
@@ -29,5 +31,6 @@ axios.interceptors.response.use(
   }
 );
 
+axios.interceptors.response.eject(myResponse)
 ReactDOM.render(<App />, document.getElementById("root"));
 registerServiceWorker();
