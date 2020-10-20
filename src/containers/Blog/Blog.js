@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import {Route,Link}from 'react-router-dom'
+import {Route,NavLink}from 'react-router-dom'
 import "./Blog.css";
 import Posts from "../Posts/Posts";
 import NewPost from './NewPost/NewPost'
@@ -17,12 +17,13 @@ class Blog extends Component {
           <nav>
             <ul>
               <li>
-                <Link to='/'>Home</Link>
+                <NavLink to='/' exact
+                activeStyle={{color:'green'}}>Home</NavLink>
               </li>
               <li>
-                <Link to={{
+                <NavLink to={{
                   pathname:'/new-post',
-                }}>New-Post</Link>
+                }}>New-Post</NavLink>
               </li>
             </ul>
           </nav>
